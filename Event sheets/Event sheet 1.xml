@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>Event sheet 1</name>
+    <events>
+        <variable constant="0" name="Bhai" sid="9310242927270411" static="0" type="number">0</variable>
+        <variable constant="0" name="timescaling" sid="5708437279648636" static="0" type="number">1</variable>
+        <variable comment="Time, brah." constant="0" name="TimeSurvived" sid="3257937823517618" static="0" type="number">0</variable>
+        <variable comment="Distance, brah" constant="0" name="TotalDistance" sid="4015867643157149" static="0" type="number">0</variable>
+        <variable comment="Next block, vine creation" constant="0" name="NextBlockX" sid="5327114571015895" static="0" type="number">665</variable>
+        <variable comment="Top vine spawner" constant="0" name="TopSpawnerTargetY" sid="3439610980831968" static="0" type="number">40</variable>
+        <variable comment="sprite speed" constant="0" name="Speed" sid="6469742155184709" static="0" type="number">300</variable>
+        <variable comment="Bottom vine spawner" constant="0" name="BottomSpawnerTargetY" sid="726966054651142" static="0" type="number">308</variable>
+        <comment>Everything goes left.</comment>
+        <event-block sid="4183837126602792">
+            <conditions>
+                <condition id="-2" name="On start of layout" sid="955088681619798" type="System" />
+            </conditions>
+            <actions>
+                <action behavior="Bullet" id="3" name="Set angle of motion" sid="2752486826635685" type="TiledBackground">
+                    <param id="0" name="Angle">180</param>
+                </action>
+                <action behavior="Bullet" id="3" name="Set angle of motion" sid="8317104790204248" type="Block">
+                    <param id="0" name="Angle">180</param>
+                </action>
+                <action behavior="Bullet" id="3" name="Set angle of motion" sid="7041361615359606" type="Circlething">
+                    <param id="0" name="Angle">180</param>
+                </action>
+                <action behavior="Bullet" id="3" name="Set angle of motion" sid="7139402257070042" type="PowerUp">
+                    <param id="0" name="Angle">180</param>
+                </action>
+            </actions>
+        </event-block>
+        <comment>Wrap the scrolling background infinitely.</comment>
+        <event-block sid="4901695194915258">
+            <conditions>
+                <condition id="-1" name="Compare X" sid="243316901774439" type="TiledBackground">
+                    <param id="0" name="Comparison">3</param>
+                    <param id="1" name="X co-ordinate">-Self.Width / 2</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-1" name="Set X" sid="2179266091062072" type="TiledBackground">
+                    <param id="0" name="X">Self.X + Self.Width / 2</param>
+                </action>
+            </actions>
+        </event-block>
+        <comment>Increment distance, the path ahead.</comment>
+        <event-block sid="4253018152795163">
+            <conditions>
+                <condition id="-1" name="Every tick" sid="2604115586417575" type="System" />
+            </conditions>
+            <actions>
+                <action id="-10" name="Add to" sid="8876768676174938" type="System">
+                    <param id="0" name="Variable">TotalDistance</param>
+                    <param id="1" name="Value">Block.Bullet.Speed * dt</param>
+                </action>
+                <action id="-11" name="Subtract from" sid="9086746396162457" type="System">
+                    <param id="0" name="Variable">NextBlockX</param>
+                    <param id="1" name="Value">Block.Bullet.Speed * dt</param>
+                </action>
+            </actions>
+        </event-block>
+        <comment>New vine creation.</comment>
+        <event-block sid="8472449884865165">
+            <conditions>
+                <condition id="-14" name="Compare variable" sid="1221211516252535" type="System">
+                    <param id="0" name="Variable">NextBlockX</param>
+                    <param id="1" name="Comparison">3</param>
+                    <param id="2" name="Value">LayoutWidth</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-10" name="Add to" sid="4243493428434381" type="System">
+                    <param id="0" name="Variable">NextBlockX</param>
+                    <param id="1" name="Value">Block.Width</param>
+                </action>
+                <action id="-3" name="Create object" sid="5832322299833301" type="System">
+                    <param id="0" name="Object to create">Block</param>
+                    <param id="1" name="Layer">&quot;Game&quot;</param>
+                    <param id="2" name="X">NextBlockX</param>
+                    <param id="3" name="Y">BottomSpawner.Y</param>
+                </action>
+                <action behavior="Bullet" id="3" name="Set angle of motion" sid="8860345936452065" type="Block">
+                    <param id="0" name="Angle">180</param>
+                </action>
+                <action id="-3" name="Create object" sid="2983114908923726" type="System">
+                    <param id="0" name="Object to create">Block</param>
+                    <param id="1" name="Layer">&quot;Game&quot;</param>
+                    <param id="2" name="X">NextBlockX</param>
+                    <param id="3" name="Y">TopSpawner.Y - Block.Height</param>
+                </action>
+                <action behavior="Bullet" id="3" name="Set angle of motion" sid="5487845817932556" type="Block">
+                    <param id="0" name="Angle">180</param>
+                </action>
+            </actions>
+        </event-block>
+        <comment>Off-screen destroying, taki RAM nai khaaye.</comment>
+        <event-block sid="8947566349427732">
+            <conditions>
+                <condition id="-1" name="Compare X" sid="6241722876341016" type="Block">
+                    <param id="0" name="Comparison">2</param>
+                    <param id="1" name="X co-ordinate">-Self.Width</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-9" name="Destroy" sid="8331677903348602" type="Block" />
+            </actions>
+        </event-block>
+        <event-block sid="7413881295979181">
+            <conditions>
+                <condition id="-1" name="Compare X" sid="9100096579619525" type="Circlething">
+                    <param id="0" name="Comparison">2</param>
+                    <param id="1" name="X co-ordinate">-Self.Width</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-9" name="Destroy" sid="1440413197584515" type="Circlething" />
+            </actions>
+        </event-block>
+        <comment>Game Over.</comment>
+        <event-block any="1" sid="8029594871088893">
+            <conditions>
+                <condition id="-3" inverted="1" name="Is on-screen" sid="3891402514105674" type="Player" />
+                <condition id="1" name="Is overlapping another object" sid="3268957067651103" type="Player">
+                    <param id="0" name="Object">Block</param>
+                </condition>
+                <condition id="1" name="Is overlapping another object" sid="6082236182021774" type="Player">
+                    <param id="0" name="Object">Circlething</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-9" name="Destroy" sid="365623753010416" type="Player" />
+                <action id="-18" name="Set layer opacity" sid="9667551727273633" type="System">
+                    <param id="0" name="Layer">0</param>
+                    <param id="1" name="Opacity">25</param>
+                </action>
+                <action id="-9" name="Destroy" sid="9073195832449746" type="TimeDisplay" />
+                <action id="0" name="Set text" sid="8801318223905848" type="TimeDisplay">
+                    <param id="0" name="Text">&quot;Game Over&quot;</param>
+                </action>
+                <action id="-15" name="Set visible" sid="4235557007540715" type="Text">
+                    <param id="0" name="Visibility">1</param>
+                </action>
+                <action id="-15" name="Set visible" sid="7658523512365983" type="Text2">
+                    <param id="0" name="Visibility">1</param>
+                </action>
+                <action id="0" name="Set text" sid="245891123537853" type="Text2">
+                    <param id="0" name="Text">&quot;You  survived  for:  &quot; &amp; round(TimeSurvived) &amp; &quot;  metric time&quot;</param>
+                </action>
+                <action id="-15" name="Set visible" sid="3581964652749026" type="r_1">
+                    <param id="0" name="Visibility">1</param>
+                </action>
+                <action id="-21" name="Reset global variables" sid="9494851802522532" type="System" />
+            </actions>
+        </event-block>
+        <comment>Smoothing controls.</comment>
+        <event-block any="1" sid="9234784188668333">
+            <conditions>
+                <condition id="2" name="Is in touch" sid="3949683883546242" type="Touch" />
+                <condition id="2" name="Key is down" sid="9858944201141429" type="Keyboard">
+                    <param id="0" name="Key">32</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action behavior="CustomMovement" id="3" name="Accelerate" sid="6722068397895388" type="Player">
+                    <param id="0" name="Which">2</param>
+                    <param id="1" name="Acceleration">-300</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="3300314078748617">
+            <conditions>
+                <condition id="-22" name="Else" sid="6093573010861637" type="System" />
+            </conditions>
+            <actions>
+                <action behavior="CustomMovement" id="3" name="Accelerate" sid="6913827940169972" type="Player">
+                    <param id="0" name="Which">2</param>
+                    <param id="1" name="Acceleration">300</param>
+                </action>
+            </actions>
+        </event-block>
+        <comment>Changing Circlething positions.</comment>
+        <event-block sid="9550552744272268">
+            <conditions>
+                <condition id="-6" name="Every X seconds" sid="2428439987965399" type="System">
+                    <param id="0" name="Interval (seconds)">3</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-9" name="Set value" sid="5930125933111981" type="System">
+                    <param id="0" name="Variable">TopSpawnerTargetY</param>
+                    <param id="1" name="Value">10 + random(140)</param>
+                </action>
+                <action id="-9" name="Set value" sid="9412943721530512" type="System">
+                    <param id="0" name="Variable">BottomSpawnerTargetY</param>
+                    <param id="1" name="Value">LayoutHeight - 10 - random(140)</param>
+                </action>
+                <action id="-3" name="Create object" sid="902569345590864" type="System">
+                    <param id="0" name="Object to create">Circlething</param>
+                    <param id="1" name="Layer">&quot;Game&quot;</param>
+                    <param id="2" name="X">700</param>
+                    <param id="3" name="Y">random(TopSpawner.Y, BottomSpawner.Y)</param>
+                </action>
+                <action behavior="Bullet" id="3" name="Set angle of motion" sid="3752676017994446" type="Circlething">
+                    <param id="0" name="Angle">180</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="6625097159697283">
+            <conditions>
+                <condition id="-1" name="Every tick" sid="7264893038106845" type="System" />
+            </conditions>
+            <actions>
+                <action behavior="Bullet" id="3" name="Set angle of motion" sid="3365451695593123" type="TopSpawner">
+                    <param id="0" name="Angle">angle(Self.X, Self.Y, Self.X, TopSpawnerTargetY)</param>
+                </action>
+                <action behavior="Bullet" id="3" name="Set angle of motion" sid="7843323627294521" type="BottomSpawner">
+                    <param id="0" name="Angle">angle(Self.X, Self.Y, Self.X, BottomSpawnerTargetY)</param>
+                </action>
+                <action id="-24" name="Move to top" sid="8332615651950919" type="Circlething" />
+                <action id="-24" name="Move to top" sid="7552830612287978" type="PowerUp" />
+                <action id="0" name="Set text" sid="9549054542672579" type="TimeDisplay">
+                    <param id="0" name="Text">&quot;Time survived:  &quot; &amp; round(TimeSurvived) &amp;  &quot;  metric time&quot;</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="8653439196729913">
+            <conditions>
+                <condition id="-1" name="Every tick" sid="5625078880669237" type="System" />
+            </conditions>
+            <actions>
+                <action id="-10" name="Add to" sid="2303964287854584" type="System">
+                    <param id="0" name="Variable">TimeSurvived</param>
+                    <param id="1" name="Value">0.1</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="3029721235605374">
+            <conditions>
+                <condition id="0" name="On key pressed" sid="586052014437167" type="Keyboard">
+                    <param id="0" name="Key">82</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-26" name="Restart layout" sid="5398827564684068" type="System" />
+                <action id="-21" name="Reset global variables" sid="8116740006698415" type="System" />
+                <action id="-18" name="Set layer opacity" sid="7709607461787766" type="System">
+                    <param id="0" name="Layer">0</param>
+                    <param id="1" name="Opacity">100</param>
+                </action>
+                <action id="-13" name="Set time scale" sid="4546680891037731" type="System">
+                    <param id="0" name="Time scale">1.0</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="6583164571908465">
+            <conditions>
+                <condition id="0" name="On key pressed" sid="4145497011864593" type="Keyboard">
+                    <param id="0" name="Key">81</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-2" name="Go to layout" sid="949805638378222" type="System">
+                    <param id="0" name="Layout">Layout 2</param>
+                </action>
+                <action id="-18" name="Set layer opacity" sid="5747699003465837" type="System">
+                    <param id="0" name="Layer">0</param>
+                    <param id="1" name="Opacity">100</param>
+                </action>
+                <action id="-13" name="Set time scale" sid="7272947704832354" type="System">
+                    <param id="0" name="Time scale">1.0</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="5051002547656011">
+            <conditions>
+                <condition id="-6" name="Every X seconds" sid="1929646203100233" type="System">
+                    <param id="0" name="Interval (seconds)">15</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-10" name="Add to" sid="9806357192508719" type="System">
+                    <param id="0" name="Variable">timescaling</param>
+                    <param id="1" name="Value">0.2</param>
+                </action>
+                <action id="-13" name="Set time scale" sid="6588911809598893" type="System">
+                    <param id="0" name="Time scale">timescaling</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="8901058377970346">
+            <conditions>
+                <condition id="-6" name="Every X seconds" sid="9358922398379455" type="System">
+                    <param id="0" name="Interval (seconds)">random(20)</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-9" name="Set value" sid="2963980322665022" type="System">
+                    <param id="0" name="Variable">TopSpawnerTargetY</param>
+                    <param id="1" name="Value">10 + random(140)</param>
+                </action>
+                <action id="-9" name="Set value" sid="1495114695891643" type="System">
+                    <param id="0" name="Variable">BottomSpawnerTargetY</param>
+                    <param id="1" name="Value">LayoutHeight - 10 - random(140)</param>
+                </action>
+                <action id="-3" name="Create object" sid="7049754447474636" type="System">
+                    <param id="0" name="Object to create">PowerUp</param>
+                    <param id="1" name="Layer">&quot;Game&quot;</param>
+                    <param id="2" name="X">700</param>
+                    <param id="3" name="Y">random(TopSpawner.Y, BottomSpawner.Y)</param>
+                </action>
+                <action behavior="Bullet" id="3" name="Set angle of motion" sid="6121200599183086" type="PowerUp">
+                    <param id="0" name="Angle">180</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="3819205316148583">
+            <conditions>
+                <condition id="1" name="Is overlapping another object" sid="7034358516443873" type="Player">
+                    <param id="0" name="Object">PowerUp</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-9" name="Set value" sid="1047768828325173" type="System">
+                    <param id="0" name="Variable">Bhai</param>
+                    <param id="1" name="Value">round(random(0,3))</param>
+                </action>
+            </actions>
+            <sub-events>
+                <event-block sid="9605673777432302">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="1315194885456891" type="System">
+                            <param id="0" name="Variable">Bhai</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Set opacity" sid="5501812736557346" type="Player">
+                            <param id="0" name="Opacity">40</param>
+                        </action>
+                        <action id="-9" name="Destroy" sid="4237451674631151" type="PowerUp" />
+                        <action id="11" name="Set collisions enabled" sid="8900683365982723" type="Player">
+                            <param id="0" name="Collisions">0</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="9942704414849475" type="System">
+                            <param id="0" name="Seconds">10</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="1467958064944187" type="Player">
+                            <param id="0" name="Opacity">100</param>
+                        </action>
+                        <action id="11" name="Set collisions enabled" sid="488793393931236" type="Player">
+                            <param id="0" name="Collisions">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="4678413553110774">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="6901100568926793" type="System">
+                            <param id="0" name="Variable">Bhai</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-7" name="Set size" sid="9456952589332087" type="Player">
+                            <param id="0" name="Width">28</param>
+                            <param id="1" name="Height">44</param>
+                        </action>
+                        <action id="-9" name="Destroy" sid="9408670138335857" type="PowerUp" />
+                        <action id="-16" name="Wait" sid="5211287236273246" type="System">
+                            <param id="0" name="Seconds">10</param>
+                        </action>
+                        <action id="-7" name="Set size" sid="8606390580384902" type="Player">
+                            <param id="0" name="Width">45.839</param>
+                            <param id="1" name="Height">74.216</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="3388790334956532">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="5415431616555236" type="System">
+                            <param id="0" name="Variable">Bhai</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="1501235891984746" type="PowerUp" />
+                        <action id="-13" name="Set time scale" sid="9330017886042415" type="System">
+                            <param id="0" name="Time scale">timescaling- 0.5</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="3167901052822784" type="System">
+                            <param id="0" name="Seconds">5</param>
+                        </action>
+                        <action id="-13" name="Set time scale" sid="3033953181103081" type="System">
+                            <param id="0" name="Time scale">timescaling</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="2474276987356191">
+            <conditions>
+                <condition id="-1" name="Compare X" sid="8071574614474248" type="PowerUp">
+                    <param id="0" name="Comparison">2</param>
+                    <param id="1" name="X co-ordinate">-Self.Width</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-9" name="Destroy" sid="6812494007099746" type="PowerUp" />
+            </actions>
+        </event-block>
+        <event-block sid="100814235050236">
+            <conditions>
+                <condition id="1" name="Is overlapping another object" sid="6904260893230643" type="PowerUp">
+                    <param id="0" name="Object">Circlething</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-9" name="Destroy" sid="8939926214698607" type="PowerUp" />
+            </actions>
+        </event-block>
+    </events>
+</c2eventsheet>

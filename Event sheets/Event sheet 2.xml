@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>Event sheet 2</name>
+    <events>
+        <event-block sid="5168013695757508">
+            <conditions>
+                <condition id="0" name="On key pressed" sid="3039260294271162" type="Keyboard">
+                    <param id="0" name="Key">32</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-2" name="Go to layout" sid="2898756723247145" type="System">
+                    <param id="0" name="Layout">Layout 1</param>
+                </action>
+                <action id="-21" name="Reset global variables" sid="3942689427896448" type="System" />
+                <action id="-13" name="Set time scale" sid="480702215976063" type="System">
+                    <param id="0" name="Time scale">1.0</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="9083203737330504">
+            <conditions>
+                <condition id="0" name="On key pressed" sid="6520666662242849" type="Keyboard">
+                    <param id="0" name="Key">13</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-2" name="Go to layout" sid="6823703794773942" type="System">
+                    <param id="0" name="Layout">Layout 3</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="4096354875315887">
+            <conditions>
+                <condition id="17" name="On tap object" sid="2614662000763195" type="Touch">
+                    <param id="0" name="Object">Sprite6</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-2" name="Go to layout" sid="92481794694054" type="System">
+                    <param id="0" name="Layout">Layout 4</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="4295411064620712">
+            <conditions>
+                <condition id="17" name="On tap object" sid="7348690992555835" type="Touch">
+                    <param id="0" name="Object">Sprite5</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-2" name="Go to layout" sid="2584591947624042" type="System">
+                    <param id="0" name="Layout">Layout 4</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="5550897429498967">
+            <conditions>
+                <condition id="0" name="On key pressed" sid="1203313671976882" type="Keyboard">
+                    <param id="0" name="Key">82</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-2" name="Go to layout" sid="8261035855900777" type="System">
+                    <param id="0" name="Layout">Layout 4</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="6015341420449864">
+            <conditions>
+                <condition id="17" name="On tap object" sid="1625465678109409" type="Touch">
+                    <param id="0" name="Object">Sprite</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-2" name="Go to layout" sid="770447947725846" type="System">
+                    <param id="0" name="Layout">Layout 1</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="6313017254035287">
+            <conditions>
+                <condition id="-2" name="On start of layout" sid="2910383042623753" type="System" />
+            </conditions>
+            <actions>
+                <action id="0" name="Play" sid="1470590727097887" type="Audio">
+                    <param id="0" name="Audio file">MusicCher_1</param>
+                    <param id="2" name="Loop">1</param>
+                    <param id="3" name="Volume">10</param>
+                    <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                </action>
+            </actions>
+        </event-block>
+    </events>
+</c2eventsheet>
